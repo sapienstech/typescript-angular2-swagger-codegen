@@ -1,5 +1,6 @@
 import {Http, Headers, RequestOptionsArgs, Response} from 'angular2/http';
 import {Injectable} from 'angular2/core';
+import {Optional} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 let JSOG = require("node_modules/jsog/lib/JSOG");
 import * as model from "../model/model.d.ts"
@@ -19,7 +20,7 @@ export class {{classname}} {
     protected basePath = '{{basePath}}';
     public defaultHeaders : Headers = new Headers();
 
-    constructor(protected http: Http, basePath?: string) {
+    constructor(protected http: Http, @Optional() basePath?: string) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -35,7 +36,7 @@ export class {{classname}} {
         const path = this.basePath + '{{path}}'{{#pathParams}}
             .replace('{' + '{{baseName}}' + '}', String({{paramName}})){{/pathParams}};
 
-        let queryParameters: any = {};
+        let queryParameters: any = ""; // This should probably be an object in the future
         let headerParams = this.defaultHeaders;
 {{#hasFormParams}}
         let formParams: any = {};
