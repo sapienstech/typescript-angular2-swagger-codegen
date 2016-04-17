@@ -23,6 +23,14 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
         return "Generates a TypeScript Angular2 client library.";
     }
 
+    @Override
+    public void processOpts() {
+        super.processOpts();
+        supportingFiles.clear();
+        supportingFiles.add(new SupportingFile("model.d.mustache", modelPackage().replace('.', File.separatorChar), "model.d.ts"));
+    }
+
+
     public TypescriptAngular2Generator() {
         super();
         this.outputFolder = "generated-code/typescript-angular2";
@@ -30,8 +38,6 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
         embeddedTemplateDir = templateDir = "typescript-angular2";
         apiPackage = "api";
         modelPackage = "model";
-        supportingFiles.remove(supportingFiles.get(supportingFiles.size() - 1));
-        supportingFiles.add(new SupportingFile("model.d.mustache", modelPackage().replace('.', File.separatorChar), "model.d.ts"));
     }
 
     @Override
