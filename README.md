@@ -1,3 +1,5 @@
+** NOTE: This branch is for swagger-codegen > 2.1.6 **
+
 # typescript-angular2-swagger-codegen
 
 This project was generated and then modified by using:
