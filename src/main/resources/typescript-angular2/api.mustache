@@ -1,4 +1,4 @@
-import {Http, Headers, RequestOptionsArgs, Response} from 'angular2/http';
+import {Http, Headers, RequestOptionsArgs, Response, URLSearchParams} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import * as JSOG from 'jsog';
@@ -39,7 +39,7 @@ export class {{classname}} {
         let queryParameters: any = ""; // This should probably be an object in the future
         let headerParams = this.defaultHeaders;
 {{#hasFormParams}}
-        let formParams: any = {};
+        let formParams = new URLSearchParams();
 
 {{/hasFormParams}}
 {{#allParams}}
@@ -76,6 +76,9 @@ export class {{classname}} {
         {{#bodyParam}}
         requestOptions.body = JSOG.stringify({{paramName}});
         {{/bodyParam}}
+        {{#hasFormParams}}
+        requestOptions.body = formParams.toString();
+        {{/hasFormParams}}
 
         return this.http.request(path, requestOptions)
             .map((response: Response) => {
