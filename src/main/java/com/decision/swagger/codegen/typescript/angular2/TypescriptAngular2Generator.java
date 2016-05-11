@@ -4,10 +4,7 @@ import io.swagger.codegen.CodegenConfig;
 import io.swagger.codegen.CodegenParameter;
 import io.swagger.codegen.SupportingFile;
 import io.swagger.codegen.languages.TypeScriptAngularClientCodegen;
-import io.swagger.models.properties.ArrayProperty;
-import io.swagger.models.properties.FileProperty;
-import io.swagger.models.properties.MapProperty;
-import io.swagger.models.properties.Property;
+import io.swagger.models.properties.*;
 
 import java.io.File;
 
@@ -46,6 +43,9 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
         if(p instanceof ArrayProperty) {
             ArrayProperty mp1 = (ArrayProperty)p;
             inner = mp1.getItems();
+            if(inner instanceof ByteArrayProperty){
+                return "Int8Array";
+            }
             return this.getSwaggerType(p) + "<" + this.getTypeDeclaration(inner) + ">";
         } else if(p instanceof MapProperty) {
             MapProperty mp = (MapProperty)p;

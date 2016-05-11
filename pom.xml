@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.decision</groupId>
   <artifactId>typescript-angular2-swagger-codegen</artifactId>
-  <version>1.1</version>
+  <version>1.1.1</version>
   <packaging>jar</packaging>
   <name>Typescript Angular2 Swagger Code Generator</name>
   <prerequisites>
