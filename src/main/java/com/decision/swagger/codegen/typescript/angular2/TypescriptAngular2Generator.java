@@ -63,13 +63,15 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
     }
 
     private String addModelPrefix(String swaggerType) {
-        String type = null;
-        if (typeMapping.containsKey(swaggerType)) {
-            type = typeMapping.get(swaggerType);
-            if (languageSpecificPrimitives.contains(type))
-                return type;
-        } else
-            type = "model." + swaggerType;
+        String type = swaggerType;
+        if (!swaggerType.startsWith("Array")) {
+            if (typeMapping.containsKey(swaggerType)) {
+                type = typeMapping.get(swaggerType);
+                if (languageSpecificPrimitives.contains(type))
+                    return type;
+            } else
+                type = "model." + swaggerType;
+        }
         return type;
     }
 
