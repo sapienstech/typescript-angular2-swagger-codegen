@@ -49,6 +49,7 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
             }
             return this.getSwaggerType(p) + "<" + this.getTypeDeclaration(inner) + ">";
         } else if(p instanceof MapProperty) {
+            System.err("map found:" + p.getName());
             MapProperty mp = (MapProperty)p;
             inner = mp.getAdditionalProperties();
             return "{ [key: string]: " + this.getTypeDeclaration(inner) + "; }";
