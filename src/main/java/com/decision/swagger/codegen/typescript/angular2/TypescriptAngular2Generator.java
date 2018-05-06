@@ -7,6 +7,7 @@ import io.swagger.codegen.languages.TypeScriptAngularClientCodegen;
 import io.swagger.models.properties.*;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen implements CodegenConfig {
 
@@ -50,6 +51,7 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
         } else if(p instanceof MapProperty) {
             MapProperty mp = (MapProperty)p;
             inner = mp.getAdditionalProperties();
+            System.err.println("map found:"+"{ [key: string]: " + this.getTypeDeclaration(inner));
             return "{ [key: string]: " + this.getTypeDeclaration(inner) + "; }";
         } else {
             return p instanceof FileProperty ?"any":super.getTypeDeclaration(p);
@@ -64,7 +66,10 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
 
     private String addModelPrefix(String swaggerType) {
         String type = swaggerType;
-        if (!swaggerType.startsWith("Array")) {
+        if(swaggerType.startsWith("{ [key: string]:")){
+            return type;
+        }
+        else if (!swaggerType.startsWith("Array")) {
             if (typeMapping.containsKey(swaggerType)) {
                 type = typeMapping.get(swaggerType);
                 if (languageSpecificPrimitives.contains(type))
