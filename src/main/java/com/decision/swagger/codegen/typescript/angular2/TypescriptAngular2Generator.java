@@ -7,6 +7,7 @@ import io.swagger.codegen.languages.TypeScriptAngularClientCodegen;
 import io.swagger.models.properties.*;
 
 import java.io.File;
+import java.util.logging.Logger;
 
 public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen implements CodegenConfig {
 
@@ -64,7 +65,7 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
 
     private String addModelPrefix(String swaggerType) {
         String type = swaggerType;
-        if (!swaggerType.startsWith("Array")) {
+        if (!swaggerType.startsWith("Array") && !swaggerType.startsWith("{ [key: string]: ")) {
             if (typeMapping.containsKey(swaggerType)) {
                 type = typeMapping.get(swaggerType);
                 if (languageSpecificPrimitives.contains(type))
