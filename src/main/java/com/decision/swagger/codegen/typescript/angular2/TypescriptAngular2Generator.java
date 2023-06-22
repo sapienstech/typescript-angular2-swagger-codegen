@@ -31,7 +31,8 @@ public class TypescriptAngular2Generator extends TypeScriptAngularClientCodegen 
     public TypescriptAngular2Generator() {
         super();
         this.outputFolder = "generated-code/typescript-angular2";
-        typeMapping.put("Date","Date");
+        typeMapping.put("Date", "Date");
+        typeMapping.put("any", "any");
         embeddedTemplateDir = templateDir = "typescript-angular2";
         apiPackage = "api";
         modelPackage = "model";
